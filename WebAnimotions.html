@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body class="flex justify-center">
+    <div class="p-[50px]">
+      <div class="container h-[110px]">
+        <div class="content flex flex-col gap-[10px]"></div>
+      </div>
+    </div>
+    <script>
+      let content,
+        children = [],
+        hold = 3,
+        index = 0,
+        gapOfContent = 0
+
+      $(window).on('load', function () {
+        content = $('.content')
+        gapOfContent = parseInt(content.css('gap'))
+        handler()
+      })
+
+      async function handler() {
+        while (true) {
+          index++
+          const height = generateNum(20, 100)
+          console.log(height)
+          const div = $('<div></div>')
+          div.addClass('bg-violet-500/20 flex-none text-violet-500 w-[100px] px-[10px] rounded-[4px] flex items-center')
+          div.css('height', height + 'px')
+          div.html(index)
+          children.push(div)
+          content.append(div)
+          doAnimate({
+            target: div[0],
+            keyframes: 'opacity',
+            initValue: `0`,
+            endValue: `1`,
+            fill: 'forwards',
+            duration: 500,
+          })
+          if (children.length > hold) {
+            const target = children.shift()
+            const hOfTarget = parseInt(target.css('height'))
+            doAnimate({
+              target: target[0],
+              keyframes: 'opacity',
+              initValue: `1`,
+              endValue: `0`,
+              fill: 'forwards',
+              duration: 500,
+              endCallback: () => {
+                target.remove()
+              },
+            })
+            doAnimate({
+              target: content[0],
+              keyframes: 'transform',
+              initValue: `translate(0,0)`,
+              endValue: `translate(0,-${hOfTarget + gapOfContent}px)`,
+              duration: 500,
+            })
+          }
+          await sleep(1000)
+        }
+      }
+
+      function doAnimate({ target, keyframes, initValue, endValue, fill, duration, endCallback }) {
+        const animate = target.animate(
+          [
+            {
+              [keyframes]: initValue,
+            },
+            {
+              [keyframes]: endValue,
+            },
+          ],
+          {
+            duration,
+            fill,
+          }
+        )
+        endCallback &&
+          (animate.onfinish = () => {
+            endCallback()
+          })
+      }
+
+      function generateNum(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min)
+      }
+
+      function sleep(time) {
+        return new Promise((resolve) => setTimeout(resolve, time))
+      }
+    </script>
+  </body>
+  <style>
+    body {
+      margin: unset;
+      min-height: 100vh;
+      background-color: #333;
+    }
+  </style>
+</html>

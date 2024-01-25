@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body class="justify-center min-h-screen m-[unset] bg-[#333] flex">
+    <div id="app">
+      <div class="cursor-pointer mt-[100px] bg-blue-500 text-white p-[2px_10px] w-max rounded-[4px] text-[12px]" @click="addRow">+ 行</div>
+      <div class="cursor-pointer mt-[10px] bg-blue-500 text-white p-[2px_10px] w-max rounded-[4px] text-[12px]" @click="addCol">+ 列</div>
+      <input type="text" class="bg-[unset] mt-[10px] outline-none border-solid border-[1px] border-white text-white" v-model="rate" />
+      <table class="mt-[20px]">
+        <tr class="bg-violet-500/20 text-violet-500">
+          <td class="px-[10px] text-[15px]" v-for="(item, index) in first.child" :key="index">
+            <input type="text" class="bg-[unset] outline-none border-none text-white" v-model="item.value" />
+          </td>
+        </tr>
+        <tbody>
+          <tr class="bg-violet-500/20 text-violet-500" v-for="(item, index) in list.filter((item, index) => index > 0)" :key="index">
+            <td class="px-[10px] text-[15px]" v-for="(j, i) in item.child">{{ j.value }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      const { createApp, ref, reactive, watch } = Vue
+      createApp({
+        setup() {
+          const first = reactive({
+            child: [
+              {
+                value: 800,
+              },
+              {
+                value: 200,
+              },
+            ],
+          })
+          const rate = ref(20)
+          const list = ref([first])
+
+          watch(first, (val) => {
+            handle()
+          })
+          watch(rate, (val) => {
+            handle()
+          })
+
+          const handle = () => {
+            list.value
+              .filter((item, index) => index > 0)
+              .forEach((item, index) => {
+                item.child.forEach((j, i) => {
+                  j.value = (first.child[i].value - first.child[i].value * (rate.value / 100) * (index + 1)).toFixed(2)
+                })
+              })
+            console.log(list.value)
+          }
+
+          const addRow = () => {
+            const row = reactive({
+              child: [],
+            })
+            first.child.forEach((item) => {
+              row.child.push({
+                value: 0,
+              })
+            })
+            list.value.push(row)
+            handle()
+          }
+
+          const addCol = () => {
+            list.value.forEach((item) => {
+              item.child.push({
+                value: 0,
+              })
+            })
+            handle()
+          }
+
+          return {
+            rate,
+            first,
+            list,
+            addRow,
+            addCol,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

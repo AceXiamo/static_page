@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+  .container {
+    background-color: #5f936e;
+    overflow: hidden;
+    max-height: 0;
+    width: 100px;
+    transition: max-height 0.5s ease-out;
+  }
+  .container.active {
+    max-height: 1000px;
+    transition: max-height 0.5s ease-in;
+  }
+</style>
+
+<div class="container">
+  <div class="content">
+    <!-- content here -->
+  </div>
+</div>
+
+<script>
+  const container = document.querySelector('.container');
+  const content = document.querySelector('.content');
+
+  container.addEventListener('click', () => {
+    container.classList.toggle('active');
+    container.style.maxHeight = container.classList.contains('active') ? `${content.offsetHeight}px` : '0';
+  });
+</script>
+</body>
+</html>

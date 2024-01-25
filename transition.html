@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body class="m-[unset] bg-[#333] min-h-screen flex flex-col items-center gap-[20px] p-[100px] box-border">
+    <div id="add_btn" class="text-violet-500 bg-violet-500/30 p-[2px_12px] rounded-[4px] select-none cursor-pointer">add</div>
+    <div id="container" class="bg-white/20 w-max p-[20px] rounded-md flex gap-[20px] max-w-[820px] flex-wrap">
+      <div onclick="remove(event)" class="item w-[100px] h-[100px] bg-white/20 rounded-md grid place-content-center text-white" style="--i: a1">1</div>
+      <div onclick="remove(event)" class="item w-[100px] h-[100px] bg-white/20 rounded-md grid place-content-center text-white" style="--i: a2">2</div>
+      <div onclick="remove(event)" class="item w-[100px] h-[100px] bg-white/20 rounded-md grid place-content-center text-white" style="--i: a3">3</div>
+      <div onclick="remove(event)" class="item w-[100px] h-[100px] bg-white/20 rounded-md grid place-content-center text-white" style="--i: a4">4</div>
+      <div onclick="remove(event)" class="item w-[100px] h-[100px] bg-white/20 rounded-md grid place-content-center text-white" style="--i: a5">5</div>
+      <div onclick="remove(event)" class="item w-[100px] h-[100px] bg-white/20 rounded-md grid place-content-center text-white" style="--i: a6">6</div>
+      <div onclick="remove(event)" class="item w-[100px] h-[100px] bg-white/20 rounded-md grid place-content-center text-white" style="--i: a7">7</div>
+      <div onclick="remove(event)" class="item w-[100px] h-[100px] bg-white/20 rounded-md grid place-content-center text-white" style="--i: a8">8</div>
+      <div onclick="remove(event)" class="item w-[100px] h-[100px] bg-white/20 rounded-md grid place-content-center text-white" style="--i: a9">9</div>
+      <div onclick="remove(event)" class="item w-[100px] h-[100px] bg-white/20 rounded-md grid place-content-center text-white" style="--i: a10">10</div>
+    </div>
+  </body>
+  <script>
+    let addBtn, container, index = 11
+    $(document).ready(function () {
+      addBtn = document.querySelector('#add_btn')
+      container = document.querySelector('#container')
+
+      addBtn.addEventListener('click', addHandle)
+    })
+
+    function remove(e) {
+      document.startViewTransition(() => {
+        e.target.remove()
+      })
+    }
+
+    function addHandle() {
+      index++
+      let div = document.createElement('div')
+      div.classList.add('w-[100px]', 'h-[100px]', 'bg-white/20', 'rounded-md', 'grid', 'place-content-center', 'text-white', 'item')
+      div.style.setProperty('--i', `a${index}`)
+      div.innerText = index
+
+      div.onclick = function () {
+        document.startViewTransition(() => {
+          div.remove()
+        })
+      }
+
+      document.startViewTransition(() => {
+        container.appendChild(div)
+      })
+    }
+  </script>
+
+  <style>
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      /* 新视图*/
+      animation-duration: 0.2s;
+    }
+
+    .item {
+      view-transition-name: var(--i);
+    }
+  </style>
+</html>

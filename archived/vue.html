@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div @click="clickHandle">{{ message }}</div>
+    </div>
+  </body>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!',
+      },
+      methods: {
+        clickHandle() {
+          let divDom = document.createElement('div')
+          divDom.innerText = '233333333'
+          divDom.addEventListener('click', () => {
+            this.fun()
+          })
+          document.querySelector('#app').appendChild(divDom)
+        },
+        fun() {
+          console.log(123)
+        },
+      },
+    })
+  </script>
+  <style>
+    body {
+      margin: unset;
+    }
+
+    #app {
+      min-height: 100vh;
+      min-width: 100vw;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</html>

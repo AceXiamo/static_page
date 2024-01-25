@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>五子棋 🎮</title>
+    <script src="js/game.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="game-container">
+        <div class="click-area"></div>
+    </div>
+</body>
+<style>
+    body {
+        margin: unset;
+        background-color: #1F2937;
+        min-height: 100vh;
+        min-width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .game-container {
+        width: 676px;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .column-item {
+        width: 24px;
+        height: 24px;
+        border: 1px solid #9CA3AF;
+    }
+
+    .click-area {
+        width: 650px;
+        position: absolute;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .click-item {
+        width: 26px;
+        height: 26px;
+    }
+
+    .click-item-active-white {
+        background-color: white;
+        border-radius: 100%;
+    }
+
+    .click-item-active-black {
+        background-color: black;
+        border-radius: 100%;
+    }
+</style>
+</html>

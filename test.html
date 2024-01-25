@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+  </head>
+  <style>
+    body {
+      background-color: #333;
+    }
+  </style>
+  <body>
+    <div id="app" class="text-white"></div>
+  </body>
+  <script>
+    let app,
+      methods = new Set()
+
+    const data = {
+      str: '2333',
+    }
+
+    const obj = new Proxy(data, {
+      get(target, key) {
+        methods.add(fn)
+        return target[key]
+      },
+      set(target, key, value) {
+        target[key] = value
+        methods.forEach((fn) => fn())
+        return true
+      },
+    })
+
+    function fn() {
+      app.innerText = obj.str
+    }
+
+    window.onload = () => {
+      app = document.querySelector('#app')
+      fn()
+
+      setTimeout(() => {
+        obj.str = '6666'
+      }, 5000)
+    }
+  </script>
+</html>

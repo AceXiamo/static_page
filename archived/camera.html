@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Camera Page</title>
+</head>
+<body>
+<video id="video" width="640" height="480"></video>
+<div class="btn-container">
+    <canvas id="canvas" width="640" height="480"></canvas>
+</div>
+
+<script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    navigator.mediaDevices.getUserMedia({video: true})
+        .then(stream => {
+            video.srcObject = stream;
+            video.play();
+
+            setInterval(() => {
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                ctx.filter = 'blur(10px)';
+                ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height);
+                ctx.filter = 'none';
+            }, 50);
+        })
+        .catch(error => {
+            console.error('获取视频流失败', error);
+        });
+</script>
+</body>
+<style>
+    body {
+        background-color: #111827;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        min-width: 100vw;
+        margin: unset;
+    }
+
+    #video {
+        display: none;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 400px;
+        height: 120px;
+        overflow: hidden;
+        border-radius: 100px;
+        position: relative;
+        box-shadow: 0 0 20px rgba(255, 255, 255, .8);
+    }
+
+    .btn-container::before {
+        content: "";
+        position: absolute;
+        border-radius: 100px;
+        background:
+                linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc),
+                linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc);
+        background-size: 1px 1px; /* 网格大小 */
+        backdrop-filter: blur(10px);
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+</style>
+</html>

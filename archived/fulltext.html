@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+  </head>
+  <body class="bg-gray-900 flex justify-center items-center min-h-screen m-0">
+    <div class="flex flex-col rounded-1 my-[200px]">
+      <div class="min-w-[300px] min-h-[200px] bg-white rounded-1 outline-none p-[10px]" id="content" contenteditable="true"></div>
+    </div>
+  </body>
+  <script>
+    window.__unocss = {
+      rules: [
+        // custom rules...
+      ],
+      presets: [
+        // custom presets...
+      ],
+      // ...
+    }
+
+    const codeReg = /`([^]*)`/g
+    let content
+    window.addEventListener('DOMContentLoaded', () => {
+      content = document.getElementById('content')
+      content.addEventListener('input', () => {
+        let selection = saveSelection(content)
+        let html = content.innerHTML
+        html = html.replace(codeReg, '<code>$1</code>')
+        html = html.replace(/\u200B/g, '')
+        content.innerHTML = html
+        moveCursorToPosition(content, selection.start)
+      })
+    })
+
+    function saveSelection(containerEl) {
+      let sel = window.getSelection()
+      if (sel.rangeCount > 0) {
+        let range = sel.getRangeAt(0)
+        let preSelectionRange = range.cloneRange()
+        preSelectionRange.selectNodeContents(containerEl)
+        preSelectionRange.setEnd(range.startContainer, range.startOffset)
+        let start = preSelectionRange.toString().length
+
+        return {
+          start: start,
+          end: start + range.toString().length,
+        }
+      } else {
+        return { start: 0, end: 0 }
+      }
+    }
+
+    function moveCursorToPosition(node, position) {
+      let stack = [node],
+        count = 0,
+        currentNode,
+        done = false
+
+      while (!done && (currentNode = stack.pop())) {
+        if (currentNode.nodeType === Node.TEXT_NODE) {
+          let nextCount = count + currentNode.length
+          if (nextCount >= position) {
+            let range = document.createRange()
+            let sel = window.getSelection()
+            range.setStart(currentNode, position - count)
+            range.collapse(true)
+            sel.removeAllRanges()
+            sel.addRange(range)
+            done = true
+          } else {
+            count = nextCount
+          }
+        } else if (currentNode != node && currentNode instanceof HTMLElement) {
+          let range = document.createRange()
+          let sel = window.getSelection()
+          var textNode = document.createTextNode('\u200B')
+          node.appendChild(textNode)
+          range.setStartAfter(textNode)
+          range.collapse(true)
+          sel.removeAllRanges()
+          sel.addRange(range)
+          done = true
+        } else {
+          for (let i = currentNode.childNodes.length - 1; i >= 0; i--) {
+            stack.push(currentNode.childNodes[i])
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    code {
+      color: white;
+      background-color: #1d1f30;
+      margin: 0 2px;
+      padding: 1px 2px;
+      border-radius: 3px;
+    }
+  </style>
+</html>

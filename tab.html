@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item"></div>
+    </div>
+  </body>
+  <style>
+    body {
+      background-color: #333;
+      margin: unset;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 500px;
+      height: 50px;
+      background-color: #e55e5e;
+      position: relative;
+      border: 1px solid;
+    }
+
+    .item {
+      position: relative;
+      height: 100%;
+      width: 50%;
+      background: linear-gradient(to right, #fffef8 0, #fffef8 calc(100% - 20px), transparent calc(100% - 20px), transparent 100%);
+      border-top-right-radius: 20px;
+    }
+
+    .item::before {
+      position: absolute;
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 0 solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 50px solid red;
+      right: 0;
+    }
+  </style>
+</html>

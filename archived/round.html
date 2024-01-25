@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="round"></div>
+    </div>
+  </body>
+
+  <style>
+    :root {
+      --rate: 5;
+    }
+
+    body {
+      margin: unset;
+      background-color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    * {
+      transition: all .2s;
+    }
+
+    .container {
+      width: 400px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .round {
+      width: 2000px;
+      height: 2000px;
+      border-radius: 100%;
+      position: absolute;
+      bottom: 0;
+      transform: translateY(calc(100% - 100px));
+      border: 3px solid white;
+      box-sizing: border-box;
+    }
+
+    .round::after {
+      content: '';
+      width: 2000px;
+      height: 2000px;
+      border-radius: 100%;
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      border: 3px solid red;
+      border-bottom: 3px solid #fff;
+      border-right: 3px solid #fff;
+      box-sizing: border-box;
+      transform: rotate(calc(303deg + (24deg * (var(--rate) * .01))));
+    }
+  </style>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="tools-container">
+    <div class="tool-item gpt">
+        <div>🤖 ChatGPT Web</div>
+        <div>🤖 ChatGPT Web</div>
+        <div>不如问问万能的ChatGPT 🤔</div>
+        <a href="https://gpt.takina.ink/" target="_blank"></a>
+    </div>
+    <div class="tool-item pixiv">
+        <div>🍥 Pixiv Image Site</div>
+        <div>🍥 Pixiv Image Site</div>
+        <div>我在Pixiv中收集的插画捏 🐾</div>
+        <a href="https://pixiv.qwq.link" target="_blank"></a>
+    </div>
+</div>
+</body>
+<style>
+    .tools-container {
+        display: flex;
+        gap: 10px;
+    }
+
+    .tool-item {
+        font-size: 14px;
+        position: relative;
+        border-radius: 7px;
+        transition: all .5s;
+    }
+
+    .tool-item > div {
+        user-select: none;
+    }
+
+    .tool-item:hover > div:nth-child(1) {
+        transform: scale(1.01);
+    }
+
+    .tool-item:hover > div:nth-child(2) {
+        transform: scale(1.01) translateY(calc(-100% - 15px)) translateX(10px);
+    }
+
+    .tool-item:hover > div:nth-child(2) {
+        opacity: 1;
+    }
+
+
+    .tool-item > div:nth-child(1), .tool-item > div:nth-child(2) {
+        border: 1px solid;
+        border-radius: 7px;
+        padding: 2px 12px;
+    }
+
+    .tool-item > div:nth-child(1) {
+        cursor: pointer;
+    }
+
+    .tool-item > div:nth-child(2) {
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        filter: blur(5px);
+        transform: scale(1.05) translateX(2px) translateY(2px);
+        opacity: 0;
+        transition: all .5s;
+    }
+
+    .tool-item:hover > div:nth-child(3) {
+        opacity: 1;
+        transform: translateY(calc(-100% - 15px)) translateX(0);
+    }
+
+    .tool-item > div:nth-child(3) {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 13px;
+        white-space: nowrap;
+        transform: translateY(calc(-100% - 15px)) translateX(10px);
+        background-color: rgba(255, 255, 255, .8);
+        padding: 4px 7px;
+        border-radius: 4px;
+        transition: all .5s;
+    }
+
+    .tool-item > a {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    .gpt {
+        color: #059669;
+        background-color: #05966950;
+    }
+
+    .gpt:hover {
+        box-shadow: 0 0 7px #059669;
+    }
+
+    .pixiv {
+        color: #3B82F6;
+        background-color: #3B82F650;
+    }
+
+    .pixiv:hover {
+        box-shadow: 0 0 7px #3B82F6;
+    }
+</style>
+</html>

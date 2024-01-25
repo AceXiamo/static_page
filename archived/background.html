@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="bg">
+    <div class="content">
+        23333
+    </div>
+</div>
+</body>
+<style>
+    body {
+        margin: unset;
+    }
+
+    .bg {
+        background-image: url("https://image.qwq.link/images/2023/03/26/2022071215202249142.png");
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        min-width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bg::after {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        /*background-color: rgba(0, 0, 0, .5);*/
+        backdrop-filter: blur(10px);
+        z-index: 1;
+    }
+
+    .content {
+        font-size: 30px;
+        font-weight: bold;
+        z-index: 2;
+    }
+</style>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>雪花飘落的圣诞树</title>
+  </head>
+  <body>
+    <canvas id="christmasTreeCanvas" width="1000" height="1000"></canvas>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const canvas = document.getElementById('christmasTreeCanvas')
+        const ctx = canvas.getContext('2d')
+
+        let snowflakes = []
+
+        function drawTree() {
+          // 绘制树冠
+          ctx.fillStyle = 'green'
+          ctx.beginPath()
+          ctx.moveTo(400, 100)
+          ctx.lineTo(300, 300)
+          ctx.lineTo(500, 300)
+          ctx.fill()
+
+          ctx.beginPath()
+          ctx.moveTo(400, 200)
+          ctx.lineTo(250, 450)
+          ctx.lineTo(550, 450)
+          ctx.fill()
+
+          ctx.beginPath()
+          ctx.moveTo(400, 350)
+          ctx.lineTo(200, 600)
+          ctx.lineTo(600, 600)
+          ctx.fill()
+
+          // 绘制树干
+          ctx.fillStyle = '#8B4513' // 深棕色
+          ctx.fillRect(375, 600, 50, 100) // 绘制一个矩形作为树干
+        }
+
+        // 创建雪花对象
+        function createSnowflake() {
+          const x = Math.random() * canvas.width
+          const y = 0
+          const size = Math.random() * 5 + 2
+          const speed = Math.random() * 3 + 1
+
+          snowflakes.push({ x, y, size, speed })
+        }
+
+        // 绘制雪花
+        function drawSnowflakes() {
+          ctx.fillStyle = 'white'
+          snowflakes.forEach((snowflake) => {
+            ctx.beginPath()
+            ctx.arc(snowflake.x, snowflake.y, snowflake.size, 0, Math.PI * 2)
+            ctx.fill()
+          })
+        }
+
+        // 更新雪花位置
+        function updateSnowflakes() {
+          snowflakes.forEach((snowflake) => {
+            snowflake.y += snowflake.speed
+            if (snowflake.y > canvas.height) {
+              snowflake.y = 0
+              snowflake.x = Math.random() * canvas.width
+            }
+          })
+        }
+
+        // 动画循环
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height)
+          drawTree()
+          drawSnowflakes()
+          updateSnowflakes()
+
+          requestAnimationFrame(animate)
+        }
+
+        // 每隔一段时间创建新的雪花
+        setInterval(createSnowflake, 100)
+
+        animate()
+      })
+    </script>
+  </body>
+
+  <style>
+    body {
+      background-color: black;
+    }
+  </style>
+</html>

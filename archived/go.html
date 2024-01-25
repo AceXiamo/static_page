@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="go_container">
+    <div class="go_text">
+        <span>🐾 即将前往下一个链接 ...</span>
+    </div>
+    <div class="go-loading-image">
+        <img src="https://alioss.xiamoqwq.com/source/2023-03-03/loading_3.svg" alt=""/>
+    </div>
+</div>
+
+<div class="powered-by">Powered By&nbsp;<a href="https://takina.ink">AceXiamo@2023</a>&nbsp;🔥</div>
+</body>
+<script type="text/javascript">
+    window.addEventListener("DOMContentLoaded", () => {
+        if (window.location.href.includes('https://takina.ink/go')) {
+            // 获取 URL 参数
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlValue = urlParams.get('url');
+            if (urlValue) {
+                setTimeout(() => {
+                    window.location.href = "https://takina.ink/" + urlValue
+                }, 2000)
+            }
+        }
+    })
+</script>
+<style>
+    body {
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .powered-by {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        padding: 10px 0;
+        font-size: 15px;
+        justify-content: center;
+    }
+
+    .go_container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .go_text {
+        color: white;
+        animation: go-ani linear 1.5s forwards;
+    }
+
+    .go-loading-image {
+        filter: blur(2px);
+    }
+
+    .go-loading-image img {
+        width: 40px;
+    }
+
+    @keyframes go-ani {
+        0% {
+            transform: scale(1.07);
+            color: #9CA3AF;
+            opacity: .5;
+        }
+
+        100% {
+            transform: scale(1);
+            color: #F3F4F6;
+            opacity: 1;
+        }
+    }
+</style>
+</html>

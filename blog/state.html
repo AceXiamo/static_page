@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>xiamo's state</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://file.qwq.link/blog/state/state.js"></script>
+    <link rel="stylesheet" href="https://file.qwq.link/blog/state/state.css" />
+
+    <style>
+      @font-face {
+        font-family: 'AllFont';
+        src: url('https://alioss.xiamoqwq.com/font/web_font.woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'emoji-font';
+        src: url('https://alioss.xiamoqwq.com/font/seguiemj.ttf');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      *:not([class*='icon']):not(i) {
+        font-family: 'AllFont' !important;
+      }
+
+      body {
+        background-color: #030712;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: unset;
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="state-container">
+      <div class="title">
+        <span>xiamo's</span>
+        <span>now 🤔</span>
+      </div>
+      <div class="item-container" id="state-current-use"></div>
+      <div class="item-container" id="state-current-media"></div>
+    </div>
+  </body>
+</html>

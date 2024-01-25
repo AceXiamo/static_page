@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.5.1.min.js"></script>
+</head>
+<style>
+    body {
+        background-color: black;
+        margin: unset;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    /* music lyrics start */
+
+    #music-lyrics {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-direction: column;
+        gap: 5px;
+        color: white;
+    }
+
+    #music-lyrics > div {
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        color: #89978c;
+        transition: all .3s;
+    }
+
+    #music-lyrics > div:first-child {
+        color: #5f936e;
+        transition: color .1s;
+    }
+
+    #music-lyrics > div > div {
+        text-align: center;
+        transition: all .3s;
+    }
+
+    .lrc-in {
+        animation: .3s lrc-in forwards;
+    }
+
+    @keyframes lrc-in {
+        0% {
+            transform: translateY(10px);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .dark #music-lyrics > div {
+        color: #5b5f80;
+    }
+
+    .dark #music-lyrics > div:last-child {
+        color: #8c92b3;
+    }
+
+    /* music lyrics end */
+</style>
+<body>
+<div class="music-container">
+
+</div>
+<script type="application/javascript">
+    /* music lyrics */
+    let lrcDom, lastIndex = -1, lrcArr, lrcContainerW = 200, lrcOriginal
+
+    const generateLrcElement = () => {
+        let lrcContainer = document.createElement('div')
+        lrcContainer.id = 'music-lyrics'
+        lrcContainer.style.position = 'fixed'
+
+        let container = document.querySelector('.music-container')
+        lrcContainer.style.left = container.getBoundingClientRect().x + 'px'
+        lrcContainer.style.width = lrcContainerW + 'px'
+        lrcContainer.style.height = 100 + 'px'
+        lrcContainer.style.zIndex = '999'
+        document.body.append(lrcContainer)
+    }
+
+    const musicInit = async () => {
+        generateLrcElement()
+        lrcOriginal = await $.get('https://test.xiamoqwq.com/musicapi?type=lrc&id=41631768')
+        let sec = 30
+        setInterval(() => {
+            lyricsLoad({
+                currentTime: sec
+            })
+            sec++
+        }, 1000)
+    }
+
+    const lyricsLoad = async (media) => {
+        const handle = {
+            lyricsDomHandle: (data) => {
+                console.log(data)
+                if (lrcDom.children.length >= 2) {
+                    lrcDom.removeChild(lrcDom.childNodes[0])
+                    // let removeItem = lrcDom.childNodes[0];
+                    // removeItem.style.position = 'absolute'
+                    // removeItem.style.transform = 'translateY(-10px) !important'
+                    // removeItem.style.opacity = '0'
+                    // setTimeout(() => {
+                    //     lrcDom.removeChild(removeItem)
+                    // }, 300)
+                }
+                handle.lyricsItemAdd(data.v, data.i)
+            },
+            lyricsItemAdd: (lrc, index) => {
+                const genChild = (text) => {
+                    let childEl = document.createElement('div')
+                    childEl.innerHTML = text
+                    return childEl
+                }
+                let el = document.createElement('div')
+                el.id = 'lrc_id_' + index
+                el.classList.add('lrc-in')
+                lrc.forEach(v => {
+                    el.appendChild(genChild(v || '...'))
+                })
+                lrcDom.appendChild(el)
+            },
+            lyricsByTime: (time) => {
+                let arr = [], obj = {}, res = []
+                for (let j = 0; j < lrcArr.length; j++) {
+                    if (lrcArr[j][0] <= time) {
+                        obj.i = j
+                        arr.push(lrcArr[j])
+                    }
+                }
+                let last = arr[arr.length - 1] ? arr[arr.length - 1][0] : '-1'
+                arr.forEach(v => {
+                    if (v[0] == last) {
+                        res.push(v[1])
+                    }
+                })
+                obj.v = res
+                return obj
+            }
+        }
+
+        lrcDom = document.querySelector('#music-lyrics')
+        if (lrcOriginal) {
+            lrcArr = lyricsOriginalHandle(lrcOriginal)
+            let data = handle.lyricsByTime(media.currentTime)
+            if (lastIndex != data.i) {
+                handle.lyricsDomHandle(data)
+                lastIndex = data.i
+            }
+        }
+    }
+
+    const lyricsOriginalHandle = (original) => {
+        let res = original.split('[')
+        let lrcArr = []
+        for (let i = 0; i < res.length; i++) {
+            if (res[i]) {
+                let data = res[i].split(']')
+                data[1] = data[1].replace(/^\s+/, '').replace(/\s+$/, '')
+                let timeArr = data[0].split(':')
+                let min = Number(timeArr[0]) * 60, sec = Number(timeArr[1])
+                data[0] = min + sec
+                lrcArr.push(data)
+            }
+        }
+        // 处理前奏过长且歌词源数据的开始时间不为0
+        if (lrcArr[0][0] > 0) {
+            lrcArr.unshift([0, ''])
+        }
+        return lrcArr
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        musicInit()
+    })
+</script>
+</body>
+</html>

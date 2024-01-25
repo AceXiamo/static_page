@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="parent">
+    <div class="child" style="background-color: #f9d04a">Child Element 1</div>
+    <div class="child" style="background-color: #3B82F6">Child Element 2</div>
+    <div class="child" style="background-color: #059669">Child Element 3</div>
+</div>
+</body>
+<style>
+    body {
+        margin: unset;
+    }
+
+    .parent {
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+    }
+
+    .child {
+        height: 100px;
+        width: fit-content;
+    }
+</style>
+</html>

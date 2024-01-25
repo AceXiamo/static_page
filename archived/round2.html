@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="shadow">
+      <div class="dot-container">
+        <div class="end-dot"></div>
+      </div>
+    </div>
+  </body>
+  <style>
+    :root {
+      --rate: 50;
+    }
+
+    body {
+      background-color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .shadow {
+      width: 100px;
+      height: 100px;
+      position: relative;
+      border-radius: 50%;
+      background: conic-gradient(#0052d9 0%, #0052d9 calc(var(--rate) * 1%), #f2f3ff calc(var(--rate) * 1%), #f2f3ff 100%);
+      mask: radial-gradient(transparent 44px, #000 45px);
+      -webkit-mask: radial-gradient(transparent 44px, #000 45px);
+    }
+
+    .dot-container {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .dot-container::before,
+    .end-dot::before {
+      position: absolute;
+      top: 0;
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #0052d9;
+      border-radius: 100%;
+    }
+
+    .end-dot {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      transform: rotate(calc(360deg * var(--rate) * .01));
+    }
+    
+    .end-dot::before {
+      background: #0052d9;
+    }
+  </style>
+</html>

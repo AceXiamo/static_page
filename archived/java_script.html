@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+  const fun = () => {
+    return new Promise(r1 => {
+      let arr = []
+      const asyncFun = (key) => {
+        return new Promise(r2 => {
+          r2(key)
+        })
+      }
+      arr.push(asyncFun(1))
+      arr.push(asyncFun(2))
+      arr.push(asyncFun(3))
+
+      Promise.all(arr).then(res => {
+        r1(res)
+      })
+    })
+  }
+
+  window.onload = async () => {
+    console.log(await fun())
+  }
+</script>
+</html>

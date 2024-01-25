@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body class="m-[unset] bg-[#333] min-h-screen grid place-content-center">
+    <div id="box" class="h-[200px] w-[200px] rounded-md border border-solid border-indigo-500 bg-indigo-500/20 box-border"></div>
+  </body>
+  <script>
+    $(document).ready(function () {
+      gsap.to('#box', {
+        duration: 2,
+        keyframes: [
+          {
+            x: 100,
+            y: 100,
+            scale: 2,
+            rotate: 90,
+            borderRadius: '50%',
+            backgroundColor: '#f00',
+            border: '1px solid #000',
+            ease: 'power1.inOut'
+          },
+          {
+            x: 200,
+            y: 0,
+            scale: 1,
+            rotate: 180,
+            borderRadius: '0%',
+            backgroundColor: '#0f0',
+            border: '1px solid #000',
+            ease: 'power1.inOut'
+          },
+          {
+            x: 0,
+            y: 0,
+            scale: 1,
+            rotate: 360,
+            borderRadius: '50%',
+            backgroundColor: '#00f',
+            border: '1px solid #000',
+            ease: 'power1.inOut'
+          }
+        ]
+      })
+    })
+  </script>
+</html>

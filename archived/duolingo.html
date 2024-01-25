@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      .duolingo {
+        width: 215px;
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        padding: 10px;
+        border-radius: 8px;
+      }
+
+      .duolingo > .duolingo-logo {
+        width: 100px;
+      }
+
+      .duolingo > .duolingo-sec {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .duolingo > .duolingo-sec > .fire-content {
+        width: 70px;
+        aspect-ratio: 73/90;
+        background-image: url(https://d35aaqx5ub95lt.cloudfront.net/images/achievements/217492e7baf0961abdd2ddfb5881e7f9.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        display: flex;
+        justify-content: center;
+      }
+
+      .duolingo > .duolingo-sec > .fire-content > span {
+        position: absolute;
+        bottom: 10px;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .duolingo > .duolingo-sec > .desc {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .duolingo > .duolingo-sec > .desc > .desc-item {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        position: relative;
+        width: -moz-max-content;
+        width: max-content;
+        min-width: 30px;
+      }
+
+      .duolingo > .duolingo-sec > .desc > .desc-item > span:nth-child(1) {
+        color: #333;
+        font-size: 12px;
+        width: 24px;
+      }
+
+      .duolingo > .duolingo-sec > .desc > .desc-item > span:nth-child(2) {
+        color: white;
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 3px;
+      }
+
+      .duolingo > .duolingo-sec > .desc > .desc-item > img {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        position: absolute;
+        right: 0;
+      }
+
+      .duolingo > .duolingo-sec > .desc > .desc-user {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .duolingo > .duolingo-sec > .desc > .desc-user > img {
+        width: 24px;
+        height: 24px;
+        -o-object-fit: cover;
+        object-fit: cover;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        border-radius: 100%;
+      }
+
+      .duolingo > .duolingo-sec > .desc > .desc-user > span {
+        margin-left: 5px;
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 3px;
+        background-color: #7c3aed;
+        color: white;
+      }
+      /*# sourceMappingURL=style.css.map */
+
+      body {
+        background-color: #33333300;
+        margin: unset;
+      }
+
+      @font-face {
+        font-family: 'AllFont';
+        src: url('https://xiamo.oss-cn-shenzhen.aliyuncs.com/font/%E7%AD%91%E7%B4%ABA%E4%B8%B8.woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      *:not([class*='icon']):not(i) {
+        font-family: 'AllFont' !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="duolingo">
+      <img class="duolingo-logo" src="https://d35aaqx5ub95lt.cloudfront.net/vendor/70a4be81077a8037698067f583816ff9.svg" />
+      <div class="duolingo-sec">
+        <div class="fire-content">
+          <span>第 8 级</span>
+        </div>
+        <div class="desc">
+          <div class="desc-user">
+            <img src="https://axm.moe/avatar" />
+            <span>AceXiamo</span>
+          </div>
+          <div class="desc-item">
+            <span>连胜</span>
+            <span style="background-color: #fe9700">999d</span>
+            <img style="transform: translateX(100%) translateY(-1px)" src="https://d35aaqx5ub95lt.cloudfront.net/images/1994201dce8a55a0017d59b58a035fc3.svg" />
+          </div>
+          <div class="desc-item">
+            <img style="transform: translateX(calc(0%)) translateY(15px)" src="https://d35aaqx5ub95lt.cloudfront.net/images/9cb1bd734855384c2de08fe80443af9f.svg" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

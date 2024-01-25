@@ -1,0 +1,67 @@
+<!--live2d start-->
+<!-- Load TweenLite -->
+<script src="https://alioss.xiamoqwq.com/blog/npm/greensock%401.20.2/dist/TweenLite.js"></script>
+
+<!-- Copyrighted cubism SDK -->
+<script src="https://xiamo.oss-cn-shenzhen.aliyuncs.com/live2d/live2dcubismcore.min.js"></script>
+<!-- Load Pixi (dependency for cubism 2/4 integrated loader) -->
+<script src="https://alioss.xiamoqwq.com/blog/npm/pixi.js@5.3.6/dist/pixi.min.js"></script>
+<!-- Load cubism 4 integrated loader -->
+<script src="https://alioss.xiamoqwq.com/blog/npm/pixi-live2d-display@0.3.1/dist/cubism4.min.js"></script>
+
+<!-- Load pio and alternative loader -->
+<link href="https://alioss.xiamoqwq.com/blog/gh/journey-ad/blog-img@76ba2b3/live2d/lib/pio.css" rel="stylesheet"
+      type="text/css"/>
+<script src="https://alioss.xiamoqwq.com/blog/gh/journey-ad/blog-img@76ba2b3/live2d/lib/pio.js"></script>
+<script src="https://alioss.xiamoqwq.com/blog/gh/journey-ad/blog-img@76ba2b3/live2d/lib/pio_sdk4.js"></script>
+<!-- 嘉然 -->
+<script src="https://alioss.xiamoqwq.com/blog/gh/journey-ad/blog-img@76ba2b3/live2d/lib/load.js"></script>
+<!-- 毒霸姬 -->
+<!--    <script src="https://oss.xiamoqwq.com/Live2d%E6%A8%A1%E5%9E%8B/duba/load_db.js"></script>-->
+
+<!--live2d 夜间模式控件-->
+<script>
+    // 用于中间页跳转
+    window.addEventListener("DOMContentLoaded", () => {
+        if (window.location.href.includes('https://takina.ink/go')) {
+            // 获取 URL 参数
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlValue = urlParams.get('url');
+            if (urlValue) {
+                setTimeout(() => {
+                    window.location.href = "https://takina.ink/" + urlValue
+                }, 2000)
+            }
+        }
+    })
+
+    function toggleNightMode() {
+        if ($('body').hasClass('dark')) {
+            $('body').removeClass('dark');
+        } else {
+            $('body').addClass('dark');
+        }
+    }
+</script>
+<style>
+    #pio {
+        width: 14rem !important;
+        height: 14rem !important;
+    }
+
+    #pio-container {
+        width: auto !important;
+        z-index: 999;
+    }
+
+    .pio-action {
+        top: unset !important;
+        transform: translateX(20px);
+        overflow: hidden;
+    }
+
+    .pio-container .pio-dialog {
+        top: -5em !important;
+    }
+</style>
+<!--live2d end-->

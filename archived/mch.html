@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <canvas id="myCanvas" width="500" height="500" style="border: 1px solid #d3d3d3"> Your browser does not support the HTML5 canvas tag. </canvas>
+    <script>
+      var points = [
+        { x: 50, y: 50 },
+        { x: 70, y: 200 },
+        { x: 200, y: 100 },
+        { x: 150, y: 300 },
+        { x: 250, y: 175 },
+        {
+          x: 300,
+          y: 125,
+        },
+        { x: 350, y: 225 },
+        { x: 400, y: 350 },
+        { x: 120, y: 250 },
+      ]
+
+      function cross(o, a, b) {
+        return (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x)
+      }
+
+      function convexHull(points) {
+        points.sort(function (a, b) {
+          return a.x == b.x ? a.y - b.y : a.x - b.x
+        })
+
+        var lower = []
+        for (var i = 0; i < points.length; i++) {
+          while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], points[i]) <= 0) {
+            lower.pop()
+          }
+          lower.push(points[i])
+        }
+
+        var upper = []
+        for (var i = points.length - 1; i >= 0; i--) {
+          while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], points[i]) <= 0) {
+            upper.pop()
+          }
+          upper.push(points[i])
+        }
+
+        return lower.slice(0, lower.length - 1).concat(upper.slice(0, upper.length - 1))
+      }
+
+      var canvas = document.getElementById('myCanvas')
+      var ctx = canvas.getContext('2d')
+      for (var point of points) {
+        ctx.fillRect(point.x, point.y, 4, 4)
+      }
+
+      var hull = convexHull(points)
+      ctx.beginPath()
+      ctx.moveTo(hull[0].x, hull[0].y)
+      for (var point of hull) {
+        ctx.lineTo(point.x, point.y)
+      }
+      ctx.closePath()
+      ctx.strokeStyle = 'red'
+      ctx.lineWidth = 3
+      ctx.stroke()
+    </script>
+  </body>
+</html>

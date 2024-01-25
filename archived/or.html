@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <div>或</div>
+      </div>
+      <div class="right"></div>
+    </div>
+  </body>
+</html>
+<script>
+  const h = 70,
+    size = 3
+  window.onload = () => {
+    let right = document.querySelector('.right')
+    let html = ''
+
+    for (let i = 0; i < size; i++) {
+      const flag = i < size / 2
+      const translateY = flag ? 35 : -35
+      const width = 35
+      const height = Math.abs(h / 2 + (size / 2 - (i + 1)) * h) + Math.abs((Math.ceil(size / 2) - (i + 1)) * 20)
+      html += `<div class='item' style='height: ${h}px' index='${i}'><div style="width: ${width}px; height: ${height}px; transform: translateX(-100%) translateY(${translateY}px);" class="${
+        flag ? 'top' : 'bottom'
+      }"></div></div>`
+    }
+
+    right.innerHTML = html
+  }
+</script>
+
+<style>
+  :root {
+    --line-color: #4ade80;
+    --line-size: 3px;
+    --right-gap: 20px;
+  }
+
+  body {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: unset;
+  }
+
+  .container {
+    width: 300px;
+    display: flex;
+  }
+
+  .left {
+    width: 70px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .left > div {
+    background-color: #333;
+    width: 30px;
+    height: 40px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    gap: var(--right-gap);
+  }
+
+  .right > .item {
+    flex: none;
+    background-color: white;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .right > .item > .bottom {
+    position: absolute;
+    bottom: 0;
+    color: var(--line-color);
+    border-left: var(--line-size) solid;
+    border-bottom: var(--line-size) solid;
+  }
+
+  .right > .item > .top {
+    position: absolute;
+    top: 0;
+    color: var(--line-color);
+    border-left: var(--line-size) solid;
+    border-top: var(--line-size) solid;
+  }
+</style>

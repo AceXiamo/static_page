@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="//cdn.jsdelivr.net/npm/vue@3"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/element-plus/dist/index.css" />
+    <script src="//cdn.jsdelivr.net/npm/element-plus"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="module">
+      const { createApp, h, ref, createVNode } = Vue
+      console.log('_createVNode', createVNode)
+      console.log(ElementPlus)
+
+      createApp({
+        setup(props) {
+          const number = ref(1)
+
+          return {
+            number
+          }
+        },
+        render() {
+          return h('div', {}, [
+            h('p', {}, this.number),
+            h(
+              ElementPlus.ElButton,
+              {
+                onClick: () => {
+                  this.number++
+                },
+              },
+              {
+                default: () => '按钮',
+              }
+            ),
+          ])
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

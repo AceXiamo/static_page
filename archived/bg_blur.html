@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Another blur</title>
+</head>
+<body>
+<img src="https://image.qwq.link/images/2023/02/13/FnEmPz2aEAIn0hB.jpg"/>
+<div class="blur"></div>
+</body>
+<style>
+    body {
+        margin: unset;
+        display: flex;
+        justify-content: center;
+    }
+
+    img {
+        object-fit: cover;
+        height: 3000px;
+        width: 500px;
+    }
+
+    .blur {
+        position: fixed;
+        bottom: 0;
+        height: 100px;
+        left: 0;
+        right: 0;
+        background-image: radial-gradient(
+                rgba(0, 0, 0, 0) 1px,
+                #fff 1px
+        );
+        background-size: 4px 4px;
+        backdrop-filter: blur(3px);
+    }
+</style>
+</html>

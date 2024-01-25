@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <input type="file" onchange="change(this)" />
+      <img id="preview" style="height: 400px" />
+    </div>
+  </body>
+
+  <script>
+    let preview
+    window.onload = () => {
+      preview = document.getElementById('preview')
+    }
+
+    const change = (e) => {
+      const file = e.files[0]
+      const url = window.URL.createObjectURL(file)
+      getCover(url).then((res) => {
+        preview.src = res
+      })
+    }
+
+    const getCover = (url) => {
+      return new Promise((resolve) => {
+        const video = document.createElement('video')
+        video.autoplay = 'autoplay'
+        video.src = url
+        video.onplay = function () {
+          window.URL.revokeObjectURL(video.src)
+          const canvas = document.createElement('canvas')
+          canvas.width = this.videoWidth
+          canvas.height = this.videoHeight
+          const ctx = canvas.getContext('2d')
+          ctx.drawImage(this, 0, 0, canvas.width, canvas.height)
+          const base64 = canvas.toDataURL('image/png')
+          resolve(base64)
+        }
+      })
+    }
+  </script>
+  <style>
+    body {
+      margin: unset;
+    }
+
+    .container {
+      background-color: #222;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      gap: 20px;
+    }
+
+    input[type='file'] {
+      color: white;
+    }
+  </style>
+</html>

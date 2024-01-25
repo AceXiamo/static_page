@@ -1,0 +1,96 @@
+.language_container {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.language_container code {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background: unset;
+}
+
+.language_container code::before {
+    content: '';
+    position: absolute;
+    background-color: rgba(110,118,129,0.6);
+    border-radius: 6px;
+    height: 17px;
+    width: 100%;
+    left: 0;
+    bottom: -3px;
+    z-index: 1;
+}
+
+.language_container img {
+    height: 25px;
+    position: relative;
+    z-index: 2;
+    border-radius: 0 !important;
+}
+
+@font-face {
+    font-family: 'AllFont';
+    /* src: url('https://xiamo.oss-accelerate.aliyuncs.com/font/ZCOOLKuaiLe-Regular.woff'); */
+    /* 筑紫A丸 */
+    /* src: url('https://alioss.xiamoqwq.com/font/emmmm.woff2'); */
+    /* 这是什么字体呢？我也不知道喵 */
+    src: url('https://alioss.xiamoqwq.com/font/web_font.woff2');
+    /* ZCOOLKuaiLe */
+    /* src: url('https://alioss.xiamoqwq.com/font/ZCOOLKuaiLe-Regular.woff'); */
+    /* 抽象字体233 */
+    /* src: url('https://fastly.jsdelivr.net/gh/xm17906193/font/zpix-split.woff'); */
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+.powered-by {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    padding: 10px 0;
+    font-size: 13px;
+    justify-content: center;
+}
+
+.powered-by a {
+    color: #60A5FA;
+}
+
+.go_container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.go_text {
+    color: white;
+    animation: go-ani linear 1.5s forwards;
+}
+
+.go-loading-image {
+    filter: blur(2px);
+}
+
+.go-loading-image img {
+    width: 40px;
+}
+
+@keyframes go-ani {
+    0% {
+        transform: scale(1.07);
+        color: #9CA3AF;
+        opacity: .5;
+    }
+
+    100% {
+        transform: scale(1);
+        color: #F3F4F6;
+        opacity: 1;
+    }
+}

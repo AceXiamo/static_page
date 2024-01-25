@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="content">
+        <div class="child">
+            content  - auto
+        </div>
+    </div>
+    <div class="footer">
+        menu - 固定高度 ( 200px
+    </div>
+</body>
+<style>
+    body {
+        margin: unset;
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+
+    .content {
+        background-color: #5f936e;
+        flex: auto;
+        height: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: auto;
+    }
+
+    .child {
+        width: 100px;
+        height: 2000px;
+    }
+
+    .footer {
+        height: 200px;
+        background-color: #60A5FA;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.13/vue.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #app {
+        height: 100vh;
+      }
+      .Shuffling {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .item,
+      .item_one,
+      .item_two,
+      .item_three,
+      .item_four {
+        width: 100%;
+        min-height: 20%;
+        background-color: #99a9bf;
+        border-radius: 6px;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .item_one {
+        transform: translateY(20px);
+        z-index: 1;
+        background-color: pink;
+        width: calc(100% - 4%);
+        transform: translateX(2%);
+      }
+      .item_two {
+        transform: translateY(10px);
+        z-index: 2;
+        background-color: skyblue;
+        width: calc(100% - 2%);
+        transform: translateX(1%);
+      }
+      .item_three {
+        transform: translateY(-10px);
+        z-index: 2;
+        background-color: skyblue;
+        width: calc(100% - 2%);
+        transform: translateX(1%);
+      }
+      .item_four {
+        transform: translateY(-20px);
+        z-index: 1;
+        background-color: pink;
+        width: calc(100% - 4%);
+        transform: translateX(2%);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="Shuffling">
+        <div
+          :class="classIndex(i)"
+          v-for="(item,i) in items(index)"
+          @click="change(item)"
+        >
+          {{item}}
+        </div>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            res: [],
+            index: 0,
+          };
+        },
+        methods: {
+          createArr(n) {
+            return new Array(n).fill(0).map((v, i) => i);
+          },
+          change(i) {
+            this.index = i;
+          },
+        },
+        created() {
+          this.res = this.createArr(10);
+        },
+        computed: {
+          items() {
+            return (i) => {
+              let first, last, linshi;
+
+              if (i == 1) {
+                first = this.res.slice(-1);
+
+                last = this.res.slice(0, 4);
+                return [...first, ...last];
+              }
+
+              if (i > 2) {
+                first = this.res.slice(i - 2, i);
+              } else {
+                first = this.res.slice(i - 2);
+              }
+
+              // 尾部
+              if (i >= this.res.length - 2) {
+                last = this.res.slice(i, i + 2);
+                if (i >= this.res.length - 1) {
+                  linshi = this.res.slice(0, 2);
+                  last = last.concat(linshi);
+                } else {
+                  linshi = this.res.slice(0, 1);
+                  last = last.concat(linshi);
+                }
+              } else {
+                last = this.res.slice(i, i + 4);
+              }
+
+              let total = first.concat(last);
+              return total;
+            };
+          },
+          classIndex() {
+            return (i) => {
+              switch (i) {
+                case 0:
+                  return "item_one";
+                case 1:
+                  return "item_two";
+                case 2:
+                  return "item";
+                case 3:
+                  return "item_three";
+                case 4:
+                  return "item_four";
+              }
+            };
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

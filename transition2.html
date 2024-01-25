@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body class="m-[unset] bg-[#333] min-h-screen flex flex-col items-center gap-[20px] p-[100px] box-border">
+    <div onclick="addDrag()" class="text-violet-500 bg-violet-500/30 p-[2px_12px] rounded-[4px] select-none cursor-pointer">add</div>
+    <ol id="$demo" class="flex gap-[20px] flex-wrap max-w-[420px] pl-[unset]">
+      <div draggable="true" style="view-transition-name: card-1" class="p-[10px] rounded-md text-white bg-white/20 h-max flex">
+        <img class="h-[70px] w-[70px] object-cover" src="https://axm.moe/avatar" />
+      </div>
+      <div draggable="true" style="view-transition-name: card-2" class="p-[10px] rounded-md text-white bg-white/20 h-max flex">
+        <img class="h-[70px] w-[70px]" src="https://axm.moe/avatar" />
+      </div>
+      <div draggable="true" style="view-transition-name: card-3" class="p-[10px] rounded-md text-white bg-white/20 h-max flex">
+        <img class="h-[70px] w-[70px]" src="https://axm.moe/avatar" />
+      </div>
+      <div draggable="false" style="view-transition-name: add-btn" class="p-[10px] rounded-md text-white bg-white/20 h-max flex">
+        <img class="h-[70px] w-[70px]" src="https://image.qwq.link/images/2023/09/06/QQ20230906-163259.png" />
+      </div>
+    </ol>
+  </body>
+  <script>
+    const drag = {
+      src: null,
+      items: $demo.querySelectorAll(':scope > div'),
+    }
+
+    function addDrag() {
+      const t = new Date().getTime()
+      let div = document.createElement('div')
+      div.draggable = true
+      div.style.setProperty('--i', `a${drag.items.length + 1}`)
+      div.classList.add('p-[10px]', 'rounded-md', 'text-white', 'bg-white/20', 'h-max', 'flex')
+      div.style.setProperty('view-transition-name', `card-${new Date().getTime()}`)
+      let img = document.createElement('img')
+      img.classList.add('h-[70px]', 'w-[70px]')
+      img.src = 'https://axm.moe/avatar'
+      div.appendChild(img)
+
+      addListener(div)
+      document.startViewTransition(() => {
+        $demo.insertBefore(div, $demo.lastElementChild)
+        drag.items = $demo.querySelectorAll(':scope > div')
+      })
+    }
+
+    function handleDrop(e) {
+      e?.stopPropagation()
+
+      if (drag.src != this) {
+        if (document.startViewTransition) document.startViewTransition(() => swapSiblings(drag.src, this))
+        else swapSiblings(drag.src, this)
+      }
+    }
+
+    function handleDragStart(e) {
+      requestAnimationFrame(() => {
+        this.style.opacity = '.4'
+      })
+      e.dataTransfer.setData('text/html', this.outerHTML)
+      drag.src = this
+    }
+
+    function handleDragOver(e) {
+      e?.preventDefault()
+    }
+
+    function handleDragEnter(e) {
+      this.classList.add('over')
+    }
+
+    function handleDragLeave(e) {
+      this.classList.remove('over')
+    }
+
+    function handleDragEnd(e) {
+      this.style.opacity = '1'
+
+      drag.items.forEach((item) => {
+        item.classList.remove('over')
+      })
+    }
+
+    function handleRemove(e) {
+      document.startViewTransition(() => {
+        this.remove()
+      })
+    }
+
+    function swapSiblings(sib1, sib2) {
+      let p1 = sib1.previousSibling
+      let p2 = sib2.previousSibling
+
+      p1.after(sib2)
+      p2.after(sib1)
+    }
+
+    drag.items.forEach((item) => {
+      addListener(item)
+    })
+
+    function addListener(item) {
+      item.addEventListener('dragstart', handleDragStart, false)
+      item.addEventListener('dragenter', handleDragEnter, false)
+      item.addEventListener('dragover', handleDragOver, false)
+      item.addEventListener('dragleave', handleDragLeave, false)
+      item.addEventListener('drop', handleDrop, false)
+      item.addEventListener('dragend', handleDragEnd, false)
+      item.addEventListener('click', handleRemove, false)
+    }
+  </script>
+
+  <style>
+    @layer demo {
+      @keyframes drop-zone {
+        from {
+          box-shadow: 0 0 0 0 #60a5fa80;
+        }
+        to {
+          box-shadow: 0 0 0 25px #0000;
+        }
+      }
+
+      div.over {
+        outline: 2px dashed var(--link);
+        animation: drop-zone 1.5s ease-out infinite;
+
+        > * {
+          pointer-events: none;
+        }
+      }
+
+      [draggable] {
+        cursor: grab;
+        user-select: none;
+
+        &:active {
+          cursor: grabbing;
+        }
+      }
+    }
+  </style>
+</html>

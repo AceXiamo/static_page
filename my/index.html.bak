@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="./css/style.css" rel="stylesheet">
+  </link>
+  <script src="https://kit.fontawesome.com/b4dc4d8620.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="page-container">
+    <div class="my-info">
+      <div class="avatar">
+        <img src="https://qwq.link/images/avatar.jpg" />
+      </div>
+      <div class="content">
+        <div class="name">
+          <span>AceXiamo</span>
+        </div>
+        <div class="bottom">
+          <div>
+            <i class="fa-solid fa-location-dot"></i>
+            <span>湖南·株洲</span>
+          </div>
+          <div>
+            <i class="fa-solid fa-phone"></i>
+            <span>17673249373</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill item-container">
+      <div class="title">
+        <span>#</span>
+        <span>SKILL</span>
+      </div>
+      <div class="skill-content">
+        <div class="dot">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <span>
+          1️⃣ 服务端 <br/>
+          熟练使用Java，Spring全家桶， MyBatis&Mybatis-Plus进行业务开发，了解SpringCloud，SpringCloudAlibaba，nacos，dubbo <br/>
+          熟练使用各类中间件，如Redis，RabbitMQ，RocketMQ，ES等 <br/>
+          熟练使用各类DB，如MySQL，SQL Server，sqlite等 <br/>
+          对其它后端开发语言也有所实践，如Golang，node.js <br/>
+          熟练使用nginx进行服务部署及相关配置（反代、负载均衡、SSL <br/>
+          熟练使用Linux & Docker，以及Docker Compose部署 <br/>
+          熟练使用版本管理工具Git & SVN（当下使用Git居多 <br/>
+          <br/>
+          2️⃣ 前端 <br/>
+          熟练使用Vue2，Vue3，Vite，TypeScript，Uniapp，Electron，Echarts等开发移动端 & Web端 & 桌面端应用，对Canvas有所实践 <br/>
+          以及常用的UI组件库，如ElementUI & ElementUI-Plus，Vuetify，View Design，Vant，antd等 <br/>
+          了解Flutter <br/>
+          <br/>
+          3️⃣ 常用的IDE及Tool <br/>
+          IDEA、WebStorm、DataGrip、Goland、VsCode、Termius、Navicat、Docker... <br/>
+          <br/>
+          4️⃣ 开发环境 <br/>
+          Linux / MacOS / Windows
+        </span>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

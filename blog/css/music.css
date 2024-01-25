@@ -1,0 +1,58 @@
+#music-lyrics {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#music-lyrics > div {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #89978c;
+  transition: all .3s;
+  position: absolute;
+}
+
+#music-lyrics > div:last-child {
+  color: #5f936e;
+}
+
+#music-lyrics > div > div {
+  text-align: center;
+  transition: all .3s;
+}
+
+.lrc-in {
+  animation: .5s lrc-in ease-out forwards;
+}
+
+@keyframes lrc-in {
+  0% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.lrc-out {
+  animation: .5s lrc-out ease-out forwards;
+}
+
+@keyframes lrc-out {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-15px) scale(.8);
+    opacity: 0;
+  }
+}
